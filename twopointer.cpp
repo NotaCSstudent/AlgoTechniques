@@ -109,6 +109,59 @@ int Get_MaxSum_Array_Of_SizeK_OPTIMAL_SOLUTION(vector<int> &A,int k)
 
 
 
+
+
+
+/*
+
+
+Given n non-negative integers a1, a2, ..., an , where each represents a point at coordinate (i, ai). n vertical lines are drawn such that the two endpoints of the line i is at (i, ai) and (i, 0). Find two lines, which, together with the x-axis forms a container, such that the container contains the most water.
+
+Notice that you may not slant the container.
+
+
+This below is a sliding window problem 
+*/
+
+
+int Max_Area(vector<int> &height)
+{
+  int water = 0;
+  int start=0;
+  int end = height.size()-1;
+  while(start < end)
+  {
+    int h = min(height[start],height[end]);//The first number which is the smallest we get from the height array
+    water = max(water,(end-start)*h);
+    while(height[start]<= h && start<end)
+    {//If the start pointer is less than or equal to h and its less than end , we move start forward by 1
+      start++;
+    }
+    while(height[end]<=h && start<end)
+    {
+      //if the end pointer is less than or equal to h and its greater than start, we move end backwards by 1;
+      end--;
+    }
+    
+  }
+  return water;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 int main()
 {
 
