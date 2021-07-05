@@ -149,10 +149,51 @@ int Max_Area(vector<int> &height)
 
 
 
+/*
+
+15. 3Sum
 
 
+Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]] such that i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0.
+
+Notice that the solution set must not contain duplicate triplets.
+
+*/
 
 
+ vector<vector<int>> threeSum(vector<int>& nums) {
+        //if size is less than 3 we can not find three unique elements
+        if(nums.size()<3) return {};
+      vector<vector<int>>ans;
+        sort(nums.begin(),nums.end());
+        for(auto i=0;i<nums.size()-2;i++){
+            //to handle duplicates
+            if(i==0 || (i>0 && nums[i]!=nums[i-1])){
+                int start=i+1;
+                int end=nums.size()-1;
+                while(start<end){
+                vector<int>v;
+                  if(nums[i]+nums[start]+nums[end]==0){
+                      v.push_back(nums[i]);
+                      v.push_back(nums[start]);
+                      v.push_back(nums[end]);
+                      //to handle duplicates 
+                      while(start<end && nums[start]==nums[start+1]) start++;
+                      while(start<end && nums[end]==nums[end-1]) end--;
+                      ans.push_back(v);
+                      start++;
+                      end--;
+                  }
+                    else if( nums[i]+nums[start]+nums[end]>0){
+                        end--;
+                    }else if(nums[i]+nums[start]+nums[end]<0){
+                        start++;
+                    }
+                }
+            }
+        }
+        return ans;
+    }
 
 
 
